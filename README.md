@@ -1,1 +1,106 @@
-引言.html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>静默者计划 · 调查入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: white;
+            color: black;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: left;   /* 文字左对齐 */
+        }
+
+        .content {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 0;   /* 完全无圆角，保持极简 */
+            box-shadow: none;
+        }
+
+        .case-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        .description {
+            font-size: 1rem;
+            margin-bottom: 1.8rem;
+            color: #1a1a1a;
+        }
+
+        .quote {
+            font-style: normal;
+            margin: 1.8rem 0 2rem 0;
+            padding-left: 1rem;
+            border-left: 3px solid #ccc;
+            color: #2c3e50;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #000000;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px solid black;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            background: #333;
+            border-color: #333;
+        }
+
+        /* 完全无装饰，只保留必要间距 */
+        hr {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="case-title">案件代号：“静默者计划”</div>
+            <div class="description">
+                三年间，十七人陆续失踪，无人报案，无人寻找。他们没有离开的记录，没有报案的亲属，没有社交媒体的最后痕迹。他们就像被从系统中彻底抹去了一样。
+            </div>
+            <div class="description">
+                你是社会调查员：林述，受一家独立公益机构委托，调查一起看似普通的“人口失踪”背后，隐藏的社会结构真相
+            </div>
+            <div class="quote">
+                委托人说：“这些人不是失踪了——他们是被抹除了。”
+            </div>
+            <div style="margin-top: 2rem;">
+                <a href="桌面.html" class="btn" target="_blank">开始调查</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
