@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>蔚蓝科技 · 智慧引领未来</title>
-    <!-- Font Awesome 6 (图标库，非emoji) -->
+    <!-- Font Awesome 6 (图标库) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -69,14 +69,123 @@
             border-bottom: 2px solid #0a66c2;
             padding-bottom: 4px;
         }
+        /* 登录按钮样式 */
+        .login-btn {
+            background: transparent;
+            border: 1px solid #0a66c2;
+            color: #0a66c2;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            margin-left: 8px;
+        }
+        .login-btn:hover {
+            background: #eef3fc;
+            border-color: #0a5ba3;
+        }
 
-        /* 动态内容区 */
+        /* 自定义弹窗 (模态框) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-container {
+            background: white;
+            border-radius: 24px;
+            width: 320px;
+            max-width: 90%;
+            padding: 24px 20px 28px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+            text-align: center;
+            animation: fadeInUp 0.2s ease;
+        }
+        .modal-container h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #0a2b44;
+        }
+        .modal-container input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 1rem;
+            border: 1px solid #ccdbe9;
+            border-radius: 40px;
+            outline: none;
+            margin: 12px 0 8px;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .modal-container input:focus {
+            border-color: #0a66c2;
+            box-shadow: 0 0 0 2px rgba(10,102,194,0.2);
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .modal-buttons button {
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .modal-submit {
+            background: #0a66c2;
+            color: white;
+        }
+        .modal-submit:hover {
+            background: #0a5ba3;
+        }
+        .modal-cancel {
+            background: #f0f2f5;
+            color: #3b4e62;
+        }
+        .modal-cancel:hover {
+            background: #e4e8ed;
+        }
+        .error-msg {
+            color: #d14545;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            min-height: 24px;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 原有动态内容区 */
         .main-content {
             min-height: 580px;
             margin: 48px 0 64px;
         }
 
-        /* 首页模块 */
+        /* 首页模块等原有样式保持不变 */
         .hero {
             display: flex;
             align-items: center;
@@ -140,7 +249,6 @@
             color: #5b6f88;
         }
 
-        /* 主要人员介绍板块 */
         .team-section {
             margin: 64px 0 48px;
             background: #f9fcff;
@@ -208,7 +316,6 @@
             line-height: 1.4;
         }
 
-        /* 随机板块样式 (行业洞察 / 技术博客) */
         .random-page {
             animation: fadeIn 0.3s ease;
             background: #ffffff;
@@ -243,78 +350,6 @@
             color: #5b6f88;
         }
 
-        /* 荣誉墙样式 */
-        .honor-wall {
-            animation: fadeIn 0.3s ease;
-        }
-        .honor-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .honor-header h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #0a2b44;
-        }
-        .employee-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 32px;
-        }
-        .employee-card {
-            background: white;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
-            border: 1px solid #eef2f8;
-            transition: transform 0.2s;
-            text-align: center;
-            padding: 24px 16px;
-        }
-        .employee-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.08);
-        }
-        .employee-avatar {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(145deg, #eef3fc, #e2ebf5);
-            border-radius: 50%;
-            margin: 0 auto 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 500;
-            color: #0a66c2;
-        }
-        .employee-name {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-        .employee-title {
-            color: #0a66c2;
-            font-weight: 500;
-            margin-bottom: 12px;
-            font-size: 0.85rem;
-        }
-        .employee-honor {
-            background: #f0f6fe;
-            border-radius: 40px;
-            padding: 6px 12px;
-            font-size: 0.8rem;
-            color: #1e4663;
-            display: inline-block;
-        }
-        .refresh-tip {
-            text-align: center;
-            margin-top: 32px;
-            color: #7c8ea0;
-            font-size: 0.8rem;
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(6px);}
             to { opacity: 1; transform: translateY(0);}
@@ -343,10 +378,10 @@
                 width: 100%;
                 justify-content: space-between;
             }
-        }
-        button {
-            background: none;
-            border: none;
+            .login-btn {
+                margin-left: 0;
+                margin-top: 8px;
+            }
         }
         .btn-secondary {
             background: #eef3fc;
@@ -368,11 +403,13 @@
 <div class="container">
     <div class="navbar">
         <div class="logo">蔚蓝科技<span> · 智赋万象</span></div>
-        <div class="nav-links" id="navLinks">
-            <a href="#" data-page="home" class="active-link">首页</a>
-            <a href="#" data-page="insight">行业洞察</a>
-            <a href="#" data-page="tech">技术博客</a>
-            <a href="#" data-page="honor" id="honorNavBtn">员工荣誉墙</a>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="nav-links" id="navLinks">
+                <a href="#" data-page="home" class="active-link">首页</a>
+                <a href="#" data-page="insight">行业洞察</a>
+                <a href="#" data-page="tech">技术博客</a>
+            </div>
+            <button id="loginBtn" class="login-btn"><i class="fas fa-key" style="margin-right: 6px;"></i>登录</button>
         </div>
     </div>
 
@@ -385,9 +422,21 @@
     </footer>
 </div>
 
+<!-- 自定义弹窗模态框 -->
+<div id="loginModal" class="modal-overlay">
+    <div class="modal-container">
+        <h3>身份验证</h3>
+        <input type="text" id="accessCode" placeholder="通行证 / 临时访客码" autocomplete="off">
+        <div id="modalError" class="error-msg"></div>
+        <div class="modal-buttons">
+            <button id="modalSubmit" class="modal-submit">确认</button>
+            <button id="modalCancel" class="modal-cancel">取消</button>
+        </div>
+    </div>
+</div>
+
 <script>
     // ======================== 数据定义 ========================
-    // 主要人员介绍（核心团队，已修改林蔚川 -> 林川）
     const coreTeam = [
         {
             name: "林川",
@@ -415,69 +464,6 @@
         }
     ];
 
-    // 随机员工生成器 (与之前案件角色无重复)
-    const familyNames = [
-        "陆", "沈", "顾", "白", "孟", "方", "宋", "柳", "乔", "谭", "施", "金", "姜", "魏", "陶", "邹", "章", "俞", "倪", "卫"
-    ];
-    const givenNamesMale = [
-        "明远", "知行", "泽宇", "一鸣", "思远", "文博", "子涵", "天佑", "浩然", "宇轩", "俊辉", "景行", "北辰", "逸飞", "嘉瑞"
-    ];
-    const givenNamesFemale = [
-        "清璇", "雨桐", "若曦", "书瑶", "知意", "晚晴", "静好", "悠然", "梦溪", "灵均", "望舒", "芷柔", "明薇", "乐怡"
-    ];
-    const positions = [
-        "AI 算法专家", "前端架构师", "后端开发工程师", "产品体验总监", "数据科学家", "硬件研发工程师",
-        "云原生架构师", "嵌入式软件工程师", "网络安全专家", "市场策略经理", "客户成功总监", "机器人系统工程师",
-        "全栈开发工程师", "AI产品经理"
-    ];
-    const honorDescriptions = [
-        "年度技术创新奖 突破性算法贡献",
-        "卓越服务之星 客户满意度100%",
-        "开源贡献金奖 核心代码提交者",
-        "最佳导师奖 培养新生代力量",
-        "极客先锋 黑客马拉松冠军",
-        "产品创新金奖 主导设计获国际大奖",
-        "敏捷效能奖 交付效率提升40%",
-        "安全卫士奖 发现并修复重大漏洞",
-        "团队协作楷模 跨部门攻坚核心项目",
-        "年度新锐奖 入职两年晋升技术专家"
-    ];
-
-    function randomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function generateRandomName() {
-        const family = familyNames[randomInt(0, familyNames.length - 1)];
-        const isMale = Math.random() > 0.5;
-        const givenPool = isMale ? givenNamesMale : givenNamesFemale;
-        const given = givenPool[randomInt(0, givenPool.length - 1)];
-        return family + given;
-    }
-
-    function generateRandomEmployees(count = null) {
-        const empCount = count || randomInt(6, 9);
-        const employees = [];
-        const usedNames = new Set();
-        for (let i = 0; i < empCount; i++) {
-            let name;
-            do {
-                name = generateRandomName();
-            } while (usedNames.has(name));
-            usedNames.add(name);
-            const position = positions[randomInt(0, positions.length - 1)];
-            const honor = honorDescriptions[randomInt(0, honorDescriptions.length - 1)];
-            employees.push({
-                name: name,
-                position: position,
-                honor: honor,
-                initial: name.charAt(0)
-            });
-        }
-        return employees;
-    }
-
-    // 随机板块数据 (行业洞察)
     const insightArticles = [
         { title: "边缘智能重构工业质检", summary: "基于蔚蓝自研芯片，瑕疵检测准确率提升至99.7%，落地50+产线。" },
         { title: "2026智慧城市白皮书发布", summary: "联合信通院发布，聚焦数据融合与隐私计算新范式。" },
@@ -489,15 +475,9 @@
         { title: "联邦学习在金融场景应用", summary: "跨机构数据合作不泄露隐私，赋能风控建模。" }
     ];
 
-    // 科技感SVG插图 (替换原图片)
     const heroSvg = `<svg class="tech-svg" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="600" height="400" fill="url(#grad)" rx="24"/>
-        <defs>
-            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#EFF6FF"/>
-                <stop offset="100%" stop-color="#FFFFFF"/>
-            </linearGradient>
-        </defs>
+        <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#EFF6FF"/><stop offset="100%" stop-color="#FFFFFF"/></linearGradient></defs>
         <circle cx="300" cy="200" r="80" stroke="#0A66C2" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
         <circle cx="300" cy="200" r="60" stroke="#0A66C2" stroke-width="1.5" fill="none"/>
         <circle cx="300" cy="200" r="40" stroke="#0A66C2" stroke-width="1" fill="none"/>
@@ -522,7 +502,6 @@
         <path d="M200 120 L200 180 M280 240 L320 240" stroke="#0A66C2" stroke-width="1.5" stroke-dasharray="4 4"/>
     </svg>`;
 
-    // 渲染首页 (含主要人员介绍)
     function renderHomePage() {
         let teamHtml = '';
         coreTeam.forEach(member => {
@@ -541,136 +520,42 @@
                     <h1>蔚蓝科技<br>定义智能决策新高度</h1>
                     <p>以边缘计算与认知智能为核心，为全球企业提供高可靠、可解释的AI解决方案。从智慧城市到工业4.0，蔚蓝让数据释放深度价值。</p>
                 </div>
-                <div class="hero-illustration">
-                    ${heroSvg}
-                </div>
+                <div class="hero-illustration">${heroSvg}</div>
             </div>
             <div class="features">
-                <div class="feature-card">
-                    <i class="fas fa-microchip"></i>
-                    <h3>边缘智能平台</h3>
-                    <p>实时数据分析延迟低至毫秒级，赋能工业现场与智慧终端。</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <h3>混合云大脑</h3>
-                    <p>弹性计算与安全存储，支撑企业级大规模AI训练与推理。</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-robot"></i>
-                    <h3>自主机器人集群</h3>
-                    <p>协作机器人、巡检机器人广泛应用于物流与安防领域。</p>
-                </div>
+                <div class="feature-card"><i class="fas fa-microchip"></i><h3>边缘智能平台</h3><p>实时数据分析延迟低至毫秒级，赋能工业现场与智慧终端。</p></div>
+                <div class="feature-card"><i class="fas fa-cloud-upload-alt"></i><h3>混合云大脑</h3><p>弹性计算与安全存储，支撑企业级大规模AI训练与推理。</p></div>
+                <div class="feature-card"><i class="fas fa-robot"></i><h3>自主机器人集群</h3><p>协作机器人、巡检机器人广泛应用于物流与安防领域。</p></div>
             </div>
             <div class="team-section">
                 <h2>核心团队</h2>
                 <div class="team-desc">汇聚顶尖技术专家与行业领袖，驱动蔚蓝持续创新</div>
-                <div class="team-grid">
-                    ${teamHtml}
-                </div>
+                <div class="team-grid">${teamHtml}</div>
             </div>
             <div style="background: #f6fafe; border-radius: 32px; padding: 32px; margin-top: 32px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center;">
-                <div style="flex:1">
-                    <h2 style="font-size: 1.8rem;">企业级AI 解决方案</h2>
-                    <p style="margin-top: 12px;">蔚蓝科技已服务超过300家行业头部客户，落地项目覆盖智慧政务、智能制造、智慧医疗等领域。我们坚持技术创新与安全隐私并重。</p>
-                </div>
-                <div style="flex:1; text-align:center;">
-                    ${featureSvg}
-                </div>
+                <div style="flex:1"><h2 style="font-size: 1.8rem;">企业级AI 解决方案</h2><p style="margin-top: 12px;">蔚蓝科技已服务超过300家行业头部客户，落地项目覆盖智慧政务、智能制造、智慧医疗等领域。我们坚持技术创新与安全隐私并重。</p></div>
+                <div style="flex:1; text-align:center;">${featureSvg}</div>
             </div>
         `;
     }
 
-    // 随机板块（行业洞察）
     function renderInsightPage() {
         let articlesHtml = '';
         insightArticles.forEach(art => {
-            articlesHtml += `
-                <div class="article-item">
-                    <h3>${escapeHtml(art.title)}</h3>
-                    <p>${escapeHtml(art.summary)}</p>
-                </div>
-            `;
+            articlesHtml += `<div class="article-item"><h3>${escapeHtml(art.title)}</h3><p>${escapeHtml(art.summary)}</p></div>`;
         });
-        return `
-            <div class="random-page">
-                <div class="random-header">
-                    <h2>行业洞察</h2>
-                    <p>深度解析前沿技术趋势与产业动态</p>
-                </div>
-                <div class="articles-list">
-                    ${articlesHtml}
-                </div>
-                <div style="margin-top: 32px; text-align: center;">
-                    <button class="btn-secondary" id="backHomeFromInsight">返回首页</button>
-                </div>
-            </div>
-        `;
+        return `<div class="random-page"><div class="random-header"><h2>行业洞察</h2><p>深度解析前沿技术趋势与产业动态</p></div><div class="articles-list">${articlesHtml}</div><div style="margin-top: 32px; text-align: center;"><button class="btn-secondary" id="backHomeFromInsight">返回首页</button></div></div>`;
     }
 
-    // 技术博客板块
     function renderTechPage() {
         let articlesHtml = '';
         techArticles.forEach(art => {
-            articlesHtml += `
-                <div class="article-item">
-                    <h3>${escapeHtml(art.title)}</h3>
-                    <p>${escapeHtml(art.summary)}</p>
-                </div>
-            `;
+            articlesHtml += `<div class="article-item"><h3>${escapeHtml(art.title)}</h3><p>${escapeHtml(art.summary)}</p></div>`;
         });
-        return `
-            <div class="random-page">
-                <div class="random-header">
-                    <h2>技术博客</h2>
-                    <p>蔚蓝工程师实践分享 · 前沿技术探索</p>
-                </div>
-                <div class="articles-list">
-                    ${articlesHtml}
-                </div>
-                <div style="margin-top: 32px; text-align: center;">
-                    <button class="btn-secondary" id="backHomeFromTech">返回首页</button>
-                </div>
-            </div>
-        `;
-    }
-
-    // 荣誉墙渲染 (随机员工)
-    function renderHonorWall(employees) {
-        let cardsHtml = '';
-        employees.forEach(emp => {
-            cardsHtml += `
-                <div class="employee-card">
-                    <div class="employee-avatar">
-                        <span>${escapeHtml(emp.initial)}</span>
-                    </div>
-                    <div class="employee-name">${escapeHtml(emp.name)}</div>
-                    <div class="employee-title">${escapeHtml(emp.position)}</div>
-                    <div class="employee-honor">${escapeHtml(emp.honor)}</div>
-                </div>
-            `;
-        });
-        return `
-            <div class="honor-wall">
-                <div class="honor-header">
-                    <h2>蔚蓝荣誉墙</h2>
-                    <p>每一份坚持，都值得被看见 · 季度先锋榜</p>
-                </div>
-                <div class="employee-grid">
-                    ${cardsHtml}
-                </div>
-                <div class="refresh-tip">
-                    <i class="fas fa-sync-alt"></i> 每次进入荣誉墙都会随机刷新优秀同事
-                </div>
-                <div style="text-align: center; margin-top: 40px;">
-                    <button class="btn-secondary" id="backHomeBtn">返回首页</button>
-                </div>
-            </div>
-        `;
+        return `<div class="random-page"><div class="random-header"><h2>技术博客</h2><p>蔚蓝工程师实践分享 · 前沿技术探索</p></div><div class="articles-list">${articlesHtml}</div><div style="margin-top: 32px; text-align: center;"><button class="btn-secondary" id="backHomeFromTech">返回首页</button></div></div>`;
     }
 
     let currentPage = 'home';
-    let currentEmployees = [];
 
     function escapeHtml(str) {
         if (!str) return '';
@@ -685,67 +570,87 @@
     function setActiveNav(pageId) {
         document.querySelectorAll('#navLinks a').forEach(link => {
             const linkPage = link.getAttribute('data-page');
-            if (linkPage === pageId) {
-                link.classList.add('active-link');
-            } else {
-                link.classList.remove('active-link');
-            }
+            if (linkPage === pageId) link.classList.add('active-link');
+            else link.classList.remove('active-link');
         });
     }
 
     function switchToHome() {
         currentPage = 'home';
-        const contentDiv = document.getElementById('dynamicContent');
-        contentDiv.innerHTML = renderHomePage();
+        document.getElementById('dynamicContent').innerHTML = renderHomePage();
         setActiveNav('home');
     }
-
     function switchToInsight() {
         currentPage = 'insight';
-        const contentDiv = document.getElementById('dynamicContent');
-        contentDiv.innerHTML = renderInsightPage();
+        document.getElementById('dynamicContent').innerHTML = renderInsightPage();
         setActiveNav('insight');
-        const backBtn = document.getElementById('backHomeFromInsight');
-        if (backBtn) backBtn.addEventListener('click', () => switchToHome());
+        const btn = document.getElementById('backHomeFromInsight');
+        if (btn) btn.addEventListener('click', () => switchToHome());
     }
-
     function switchToTech() {
         currentPage = 'tech';
-        const contentDiv = document.getElementById('dynamicContent');
-        contentDiv.innerHTML = renderTechPage();
+        document.getElementById('dynamicContent').innerHTML = renderTechPage();
         setActiveNav('tech');
-        const backBtn = document.getElementById('backHomeFromTech');
-        if (backBtn) backBtn.addEventListener('click', () => switchToHome());
+        const btn = document.getElementById('backHomeFromTech');
+        if (btn) btn.addEventListener('click', () => switchToHome());
     }
 
-    function switchToHonor() {
-        currentPage = 'honor';
-        currentEmployees = generateRandomEmployees(randomInt(6, 9));
-        const contentDiv = document.getElementById('dynamicContent');
-        contentDiv.innerHTML = renderHonorWall(currentEmployees);
-        setActiveNav('honor');
-        const backBtn = document.getElementById('backHomeBtn');
-        if (backBtn) backBtn.addEventListener('click', () => switchToHome());
-    }
-
-    function initEventListeners() {
+    function initNavEvents() {
         const homeLink = document.querySelector('a[data-page="home"]');
         const insightLink = document.querySelector('a[data-page="insight"]');
         const techLink = document.querySelector('a[data-page="tech"]');
-        const honorLink = document.getElementById('honorNavBtn');
-
         if (homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); switchToHome(); });
         if (insightLink) insightLink.addEventListener('click', (e) => { e.preventDefault(); switchToInsight(); });
         if (techLink) techLink.addEventListener('click', (e) => { e.preventDefault(); switchToTech(); });
-        if (honorLink) honorLink.addEventListener('click', (e) => { e.preventDefault(); switchToHonor(); });
     }
 
-    // 初始渲染
+    // 登录弹窗逻辑
+    const modal = document.getElementById('loginModal');
+    const loginButton = document.getElementById('loginBtn');
+    const submitBtn = document.getElementById('modalSubmit');
+    const cancelBtn = document.getElementById('modalCancel');
+    const accessInput = document.getElementById('accessCode');
+    const errorSpan = document.getElementById('modalError');
+
+    function openModal() {
+        modal.style.display = 'flex';
+        accessInput.value = '';
+        errorSpan.innerText = '';
+        accessInput.focus();
+    }
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+    function handleSubmit() {
+        const code = accessInput.value.trim();
+        if (code === "") {
+            errorSpan.innerText = '请输入通行证或临时访客码';
+            return;
+        }
+        if (code.toLowerCase() === 'odin') {
+            window.open('核心区域.html', '_blank');
+            closeModal();
+        } else if (code === '285951') {
+            window.open('公共区域.html', '_blank');
+            closeModal();
+        } else {
+            errorSpan.innerText = '无效的通行证，请重试';
+            accessInput.value = '';
+            accessInput.focus();
+        }
+    }
+
+    loginButton.addEventListener('click', openModal);
+    submitBtn.addEventListener('click', handleSubmit);
+    cancelBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    accessInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSubmit(); });
+
+    // 初始化页面
     function init() {
         switchToHome();
-        initEventListeners();
+        initNavEvents();
     }
-
     init();
 </script>
 </body>
