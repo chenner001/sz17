@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>益虫公益 · 关注被系统遗忘的人</title>
+    <title>益虫公益 · 关注被遗忘的人</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -118,6 +118,70 @@
             font-size: 1.1rem;
             color: #5a6e4a;
             line-height: 1.6;
+        }
+
+        /* 创始人介绍 */
+        .founder {
+            background: #fffcf5;
+            border-radius: 32px;
+            padding: 48px 40px;
+            margin: 64px 0;
+            border: 1px solid #efe4d8;
+            text-align: center;
+        }
+        .founder h2 {
+            font-size: 1.8rem;
+            margin-bottom: 32px;
+            color: #2d3e2b;
+        }
+        .founder-card {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+        .founder-avatar {
+            width: 140px;
+            height: 140px;
+            background: #e8dccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #5b8c5a;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        .founder-info {
+            flex: 1;
+            min-width: 260px;
+            text-align: left;
+        }
+        .founder-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3e2b;
+            margin-bottom: 8px;
+        }
+        .founder-title {
+            font-size: 1rem;
+            color: #d4a373;
+            font-weight: 500;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        .founder-bio {
+            color: #5a6e4a;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .founder-quote {
+            font-style: italic;
+            border-left: 3px solid #d4a373;
+            padding-left: 20px;
+            color: #6f7e5c;
+            margin-top: 16px;
         }
 
         /* 关注群体卡片 */
@@ -280,6 +344,16 @@
                 align-items: center;
                 text-align: center;
             }
+            .founder-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .founder-info {
+                text-align: center;
+            }
+            .founder-quote {
+                text-align: left;
+            }
         }
     </style>
 </head>
@@ -300,14 +374,34 @@
 
 <div class="container">
     <div class="hero">
-        <h1>关注<span class="highlight">被系统遗忘的人</span></h1>
-        <p>环卫工、外卖骑手、流水线工人……他们支撑着城市的运转，却常常被忽略。益虫公益致力于为每一个默默付出的劳动者争取尊严与权利。</p>
+        <h1>关注<span class="highlight">被遗忘的人</span></h1>
+        <p>有些人支撑着城市的运转，却常常被忽略。益虫公益致力于为每一个默默付出的劳动者争取尊严与权利。</p>
         <a href="#" class="hero-btn">了解我们的工作</a>
     </div>
 
     <div class="mission">
         <h2>我们的使命</h2>
         <p>“益虫”之名，源于那些在土壤中默默耕耘、让生态系统得以运转的小生命。我们相信，每一个平凡而坚韧的劳动者，都值得被看见、被尊重、被保护。通过法律援助、心理支持、政策倡导，我们为边缘群体搭建发声与互助的平台。</p>
+    </div>
+
+    <!-- 创始人苏见秋介绍 -->
+    <div class="founder">
+        <h2><i class="fas fa-leaf"></i> 创始人 · 苏见秋</h2>
+        <div class="founder-card">
+            <div class="founder-avatar">
+                <i class="fas fa-seedling"></i>
+            </div>
+            <div class="founder-info">
+                <div class="founder-name">苏见秋</div>
+                <div class="founder-title">益虫公益创始人 / 社会活动家</div>
+                <div class="founder-bio">
+                    曾是一名深度调查记者，因长期关注劳工权益而转型公益。2019年创立“益虫”，立志为城市边缘劳动者搭建法律与心理支持网络。苏见秋坚信：“每一个被忽略的人，都是城市不可或缺的根系。”
+                </div>
+                <div class="founder-quote">
+                    “我们不是施舍者，而是同行者。益虫的使命是让沉默者被听见，让奉献者被善待。”
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="focus-section">
@@ -342,28 +436,28 @@
             <div class="project-item">
                 <div class="project-icon"><i class="fas fa-gavel"></i></div>
                 <div class="project-content">
-                    <h3>“听见”法律援助热线</h3>
+                    <h3>法律援助热线</h3>
                     <p>免费为劳动者提供劳动合同、工伤、欠薪等法律咨询，累计帮助超过3000人次追回合法报酬。</p>
                 </div>
             </div>
             <div class="project-item">
                 <div class="project-icon"><i class="fas fa-heartbeat"></i></div>
                 <div class="project-content">
-                    <h3>“喘息”心理支持计划</h3>
+                    <h3>心理支持计划</h3>
                     <p>针对高压工作环境的群体，提供一对一心理疏导和减压工作坊，已覆盖环卫、物流等行业。</p>
                 </div>
             </div>
             <div class="project-item">
                 <div class="project-icon"><i class="fas fa-chalkboard-user"></i></div>
                 <div class="project-content">
-                    <h3>“微光”技能学堂</h3>
+                    <h3>技能学堂</h3>
                     <p>联合职业院校开设免费数字技能、安全操作等课程，帮助劳动者拓宽职业路径。</p>
                 </div>
             </div>
             <div class="project-item">
                 <div class="project-icon"><i class="fas fa-chart-line"></i></div>
                 <div class="project-content">
-                    <h3>“破土”政策倡导</h3>
+                    <h3>政策倡导</h3>
                     <p>基于一线调研，推动地方政府完善灵活就业者保障政策，已促成两项地方性指导意见出台。</p>
                 </div>
             </div>
