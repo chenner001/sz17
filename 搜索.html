@@ -131,20 +131,20 @@
 
 <script>
     // 关键词映射表（精确匹配）
-    // 新增：【蔚蓝科技生态研究院】 映射到 生态研究院.html
     const routeMap = new Map([
         ["清港", "清港.html"],
         ["蔚蓝科技", "蔚蓝科技.html"],
         ["城市公开数据平台", "城市公开数据平台.html"],
         ["清港城市公开数据平台", "城市公开数据平台.html"],
         ["生态研究院", "生态研究院.html"],
-        ["蔚蓝科技生态研究院", "生态研究院.html"],  // 新增映射
+        ["蔚蓝科技生态研究院", "生态研究院.html"],
         ["非活跃档案库", "非活跃档案库.html"],
         ["蔚蓝科技内部网络", "通行验证.html"],
         ["清港慈心康复中心", "慈心康复中心.html"],
         ["慈心康复中心", "慈心康复中心.html"],
         ["何远航", "何远航.html"],
-        ["静默者计划", "静默者计划.html"]
+        ["静默者计划", "静默者计划.html"],
+        ["回声项目", "回声项目.html"]   // 新增映射
     ]);
 
     const inputEl = document.getElementById('searchInput');
@@ -152,13 +152,13 @@
 
     function performSearch() {
         const keyword = inputEl.value.trim();
-        if (keyword === "") return;  // 空输入无反应
+        if (keyword === "") return;
 
         const target = routeMap.get(keyword);
         if (target) {
             window.open(target, '_blank');
         }
-        // 未匹配关键词无任何反应（不跳转、无提示）
+        // 未匹配关键词无任何反应
     }
 
     searchBtn.addEventListener('click', performSearch);
