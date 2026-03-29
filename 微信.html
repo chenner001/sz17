@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>微信</title>
+    <title>微信 · 侦探工作台</title>
     <style>
         * {
             margin: 0;
@@ -226,13 +226,31 @@
         .message-row.me {
             justify-content: flex-end;
         }
-        .bubble {
+        
+        /* 关键修复：让气泡宽度自适应内容，而不是撑满父容器 */
+        .message-row .bubble-wrapper {
             max-width: 70%;
+            display: flex;
+            flex-direction: column;
+        }
+        /* 自己的消息容器右对齐 */
+        .message-row.me .bubble-wrapper {
+            align-items: flex-end;
+        }
+        /* 他人的消息容器左对齐 */
+        .message-row.other .bubble-wrapper {
+            align-items: flex-start;
+        }
+        
+        .bubble {
+            display: inline-block;        /* 关键修复：让气泡宽度根据内容收缩 */
+            max-width: 100%;              /* 保证长文本不超出父容器 */
             padding: 8px 14px;
             border-radius: 12px;
             font-size: 14px;
             line-height: 1.45;
             word-break: break-word;
+            white-space: normal;
             box-shadow: 0 1px 1px rgba(0,0,0,0.05);
         }
         .message-row.other .bubble {
@@ -250,6 +268,10 @@
             font-size: 11px;
             margin-bottom: 4px;
             color: #8d93a0;
+            width: 100%;
+        }
+        .message-row.other .sender-name {
+            text-align: left;
             padding-left: 6px;
         }
         .message-row.me .sender-name {
@@ -529,6 +551,9 @@
                 padding: 8px 18px;
                 bottom: 35%;
             }
+            .bubble-wrapper {
+                max-width: 85% !important;
+            }
         }
     </style>
 </head>
@@ -706,7 +731,6 @@
 
     // 微信风格模态框 (添加好友)
     function showAddFriendModal() {
-        // 创建遮罩层
         const overlay = document.createElement('div');
         overlay.className = 'wechat-modal-overlay';
         
@@ -731,7 +755,6 @@
         const cancelBtn = modal.querySelector('#modalCancelBtn');
         const confirmBtn = modal.querySelector('#modalConfirmBtn');
         
-        // 聚焦输入框
         setTimeout(() => inputEl.focus(), 50);
         
         const closeModal = () => {
@@ -750,12 +773,10 @@
                 errorEl.style.display = 'block';
                 return;
             }
-            // 检查是否已添加
             const existing = contactsData.find(c => c.id === "fpkf123");
             if (existing) {
                 closeModal();
                 showToast('该好友已经是您的联系人');
-                // 切换到该聊天
                 if (currentMode === 'moments') {
                     document.getElementById("momentsToggleBtn")?.classList.remove("active");
                     currentMode = 'chat';
@@ -765,7 +786,6 @@
                 renderChatInterface(currentContactId);
                 return;
             }
-            // 创建新好友
             const newFriend = {
                 id: "fpkf123",
                 name: "AAA专业发票代开",
@@ -776,7 +796,6 @@
             autoReplyCountMap.set("fpkf123", 0);
             closeModal();
             showToast('添加成功');
-            // 刷新列表并切换到新好友
             if (currentMode === 'moments') {
                 document.getElementById("momentsToggleBtn")?.classList.remove("active");
                 currentMode = 'chat';
@@ -792,7 +811,6 @@
         inputEl.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') handleConfirm();
         });
-        // 点击遮罩关闭
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) closeModal();
         });
@@ -835,6 +853,7 @@
         });
     }
     
+    // 修复后的聊天界面渲染：使用新的气泡结构使宽度自适应内容
     function renderChatInterface(contactId) {
         const contact = getContactById(contactId);
         if (!contact) return;
@@ -845,9 +864,10 @@
         contact.messages.forEach(msg => {
             const isMe = msg.sender === "me";
             const senderDisplay = isMe ? "我" : msg.sender;
+            const rowClass = isMe ? "message-row me" : "message-row other";
             messagesHtml += `
-                <div class="message-row ${isMe ? 'me' : 'other'}">
-                    <div style="max-width:80%">
+                <div class="${rowClass}">
+                    <div class="bubble-wrapper">
                         <div class="sender-name">${escapeHtml(senderDisplay)}</div>
                         <div class="bubble">${escapeHtml(msg.text).replace(/\n/g, '<br>')}</div>
                     </div>
