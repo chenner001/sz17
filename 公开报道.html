@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>蔚蓝科技事件公开报道 - 五人获救，何远航接受调查</title>
+    <title>清港慈心康复中心 | 官方门户</title>
     <style>
         * {
             margin: 0;
@@ -12,169 +12,776 @@
         }
 
         body {
-            background-color: #ffffff;
-            font-family: '宋体', 'Times New Roman', 'Georgia', serif;
-            color: #000000;
-            line-height: 1.6;
-            padding: 2rem 1rem;
+            background: #eef2f5;
+            font-family: 'Inter', 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            color: #1a2c3a;
+            min-height: 100vh;
+            padding: 24px 16px;
         }
 
-        .article-container {
-            max-width: 800px;
+        /* 主容器 - 完全去除卡片风格：无阴影、无圆角、无白色背景（内部各区块独立白色） */
+        .main-container {
+            max-width: 1280px;
             margin: 0 auto;
-            background: white;
+            background: transparent;  /* 透明背景，不使用卡片背景 */
+            overflow: hidden;
         }
 
-        .header {
+        /* 验证层 - 保留圆角 */
+        .verify-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .verify-box {
+            background: #ffffff;
+            border-radius: 32px; /* 保留圆角 */
+            padding: 2.5rem 2rem;
+            max-width: 400px;
+            width: 90%;
             text-align: center;
-            border-bottom: 2px solid #000;
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
+            box-shadow: 0 30px 45px -20px rgba(0, 0, 0, 0.2);
+            border: 1px solid #eef2f8;
         }
 
-        .newspaper-name {
-            font-size: 2rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 0.3rem;
+        .verify-box h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1f5e5e;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.5rem;
         }
 
-        .date {
-            font-size: 0.8rem;
-            color: #555;
-            margin-top: 0.3rem;
+        .verify-box p {
+            font-size: 0.9rem;
+            color: #5f7d95;
+            margin-bottom: 1.8rem;
+            border-bottom: 1px dashed #e2edf2;
+            display: inline-block;
+            padding-bottom: 6px;
         }
 
-        .headline {
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 1.5rem 0 0.5rem;
-            line-height: 1.2;
-            text-align: left;
-        }
-
-        .subhead {
-            font-size: 1.1rem;
-            color: #333;
-            margin-bottom: 1rem;
-            border-left: 3px solid #000;
-            padding-left: 1rem;
-            font-style: normal;
-        }
-
-        .byline {
-            font-size: 0.85rem;
-            color: #555;
-            margin-bottom: 1.5rem;
-            border-top: 1px solid #ddd;
-            padding-top: 0.8rem;
-        }
-
-        p {
+        .verify-box input {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 0.95rem;
+            border: 1px solid #cfdfe8;
+            background: #fefefe;
+            font-family: 'SF Mono', monospace;
             margin-bottom: 1.2rem;
+            outline: none;
+            transition: 0.2s;
+            border-radius: 60px;
+            letter-spacing: 0.5px;
+        }
+
+        .verify-box input:focus {
+            border-color: #1f5e5e;
+            box-shadow: 0 0 0 3px rgba(31, 94, 94, 0.12);
+        }
+
+        .verify-box button {
+            width: 100%;
+            background: #1f5e5e;
+            border: none;
+            border-radius: 60px;
+            color: white;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .verify-box button:hover {
+            background: #124a4a;
+            transform: translateY(-1px);
+        }
+
+        .error-message {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #bc5a3c;
+            min-height: 2rem;
+            font-weight: 500;
+        }
+
+        /* 顶部真实疗养院照片 */
+        .hero-image {
+            width: 100%;
+            height: 320px;
+            background-image: url('https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600&h=540&fit=crop');
+            background-size: cover;
+            background-position: center 35%;
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.15) 80%, rgba(0, 0, 0, 0) 100%);
+            width: 100%;
+            padding: 2rem 2.5rem;
+        }
+
+        .hero-overlay h2 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.2px;
+        }
+
+        .hero-overlay p {
+            color: rgba(255,255,240,0.9);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+
+        /* 导航栏 - 直角无卡片感 */
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #dce5ec;
+            background-color: #ffffff;
+            padding: 0 2rem;
+            margin-top: 0;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 1rem 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #4a6272;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            letter-spacing: 0.3px;
+        }
+
+        .tab-btn.active {
+            color: #1f5e5e;
+            border-bottom-color: #1f5e5e;
+            font-weight: 700;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background-color: #f6fafd;
+            color: #1f5e5e;
+        }
+
+        /* 内容区 - 白色背景但无圆角无阴影 */
+        .tab-content {
+            padding: 2rem 2rem 2.5rem;
+            background: #ffffff;
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* 介绍区 */
+        .intro-title {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #1a4a4a;
+            border-left: 4px solid #7fb2b0;
+            padding-left: 1.2rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.2px;
+        }
+
+        .intro-text {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            color: #2c3f4c;
+            line-height: 1.65;
             text-align: justify;
+        }
+
+        .signature {
+            margin-top: 2rem;
+            color: #7e95a5;
+            border-top: 1px solid #e6edf2;
+            padding-top: 1rem;
+            text-align: right;
+            font-style: italic;
+        }
+
+        /* 患者表格直角简约 */
+        .patient-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+        }
+
+        .patient-table th,
+        .patient-table td {
+            border: 1px solid #e2e8f0;
+            padding: 14px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .patient-table th {
+            background-color: #f8fbfe;
+            color: #1f5e5e;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            font-weight: 600;
+            color: #c96f2c;
+            background: #fff1e6;
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+        }
+
+        /* 记录样式 - 无图标 */
+        .memo-entry {
+            border-bottom: 1px solid #eef3f8;
+            padding: 1.3rem 0;
+        }
+
+        .memo-entry:first-child {
+            padding-top: 0;
+        }
+
+        .memo-author {
+            font-weight: 700;
+            color: #1f5e5e;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .memo-text {
+            color: #2c3f4c;
+            line-height: 1.6;
+        }
+
+        .memo-date {
+            font-size: 0.7rem;
+            color: #8aa5b8;
+            margin-top: 0.6rem;
+            text-align: right;
+        }
+
+        /* 账单列表 - 右侧不显示金额，完全去掉金额区域 */
+        .bill-list {
+            margin-top: 0.5rem;
+        }
+
+        .bill-item {
+            border-bottom: 1px solid #ecf3f7;
+            padding: 1.1rem 0;
+            cursor: pointer;
+            transition: all 0.15s;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .bill-item:hover {
+            background-color: #f9fefb;
+            border-bottom-color: #cfe3e3;
+        }
+
+        .bill-desc {
+            font-weight: 600;
+            color: #1e4a5e;
+            display: block;
+            margin-bottom: 6px;
             font-size: 1rem;
         }
 
-        .quote {
-            font-style: italic;
-            margin: 1.5rem 0;
-            padding-left: 1.5rem;
-            border-left: 3px solid #ccc;
-            color: #2c2c2c;
+        .bill-hint {
+            font-size: 0.7rem;
+            color: #b0c4d4;
+            letter-spacing: 0.2px;
         }
 
-        .pull-quote {
-            font-weight: bold;
+        /* 弹窗 - 竖向长方形，模拟真实账单风格（窄长、小票感） */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            width: 90%;
+            max-width: 380px;  /* 竖向长方形 */
+            padding: 1.5rem 1.8rem;
+            position: relative;
+            border: 1px solid #ddd9ce;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.05);
+            font-family: 'Courier New', 'SF Mono', monospace;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed #ccc8b8;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-header h3 {
             font-size: 1.1rem;
-            text-align: center;
-            margin: 1.5rem 0;
-            padding: 0.8rem;
-            background: #f9f9f9;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
+            font-weight: 700;
+            color: #2c5a5a;
+            letter-spacing: 1px;
         }
 
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin: 1.5rem 0 1rem;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 0.3rem;
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #8b7a6b;
+            font-family: monospace;
+            line-height: 1;
+        }
+
+        .bill-detail {
+            margin: 0.8rem 0;
+            line-height: 1.65;
+            font-size: 0.85rem;
+        }
+
+        .bill-detail-row {
+            display: flex;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+            border-bottom: 0.5px dotted #e2ddd0;
+            padding-bottom: 6px;
+        }
+
+        .bill-detail-label {
+            width: 85px;
+            font-weight: 700;
+            color: #5a4a3a;
+        }
+
+        .bill-detail-value {
+            flex: 1;
+            color: #2c3e3e;
+            word-break: break-word;
+        }
+
+        .stamp {
+            margin-top: 1.8rem;
+            text-align: right;
+            font-family: 'KaiTi', '华文楷书', 'STKaiti', serif;
+            color: #b85c1a;
+            font-size: 0.85rem;
+            border-top: 1px dashed #cfcabe;
+            padding-top: 0.8rem;
+            letter-spacing: 1px;
         }
 
         footer {
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #ddd;
-            font-size: 0.75rem;
-            color: #666;
             text-align: center;
+            font-size: 0.7rem;
+            color: #8ba3b3;
+            padding: 1.2rem;
+            border-top: 1px solid #ecf2f7;
+            background: #ffffff;
+            font-weight: 400;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 720px) {
             body {
-                padding: 1rem;
+                padding: 12px;
             }
-            .headline {
-                font-size: 1.6rem;
+            .hero-image {
+                height: 200px;
+            }
+            .hero-overlay h2 {
+                font-size: 1.4rem;
+            }
+            .tab-btn {
+                padding: 0.8rem 0.9rem;
+                font-size: 0.8rem;
+            }
+            .tab-content {
+                padding: 1.2rem;
+            }
+            .intro-title {
+                font-size: 1.5rem;
+            }
+            .patient-table th, .patient-table td {
+                padding: 8px 6px;
+                font-size: 0.8rem;
+            }
+            .modal-content {
+                padding: 1rem 1.2rem;
+                max-width: 320px;
             }
         }
     </style>
 </head>
 <body>
-<div class="article-container">
-    <div class="header">
-        <div class="newspaper-name">清港日报 · 深度调查</div>
-        <div class="date">2026年3月29日 星期六</div>
+
+<div id="verifyLayer" class="verify-overlay">
+    <div class="verify-box">
+        <h2>清港慈心康复中心</h2>
+        <p>院内档案查询 · 身份核验</p>
+        <input type="password" id="idNumberInput" placeholder="本院人员身份证号" autocomplete="off">
+        <button id="verifyBtn">验证身份</button>
+        <div id="verifyError" class="error-message"></div>
+        <div style="font-size:0.7rem; color:#b9cedc; margin-top:1rem;">内部系统 · 非授权人员请勿访问</div>
     </div>
-
-    <div class="headline">蔚蓝科技陷“失踪员工”漩涡：五人获救，CEO何远航辞职接受调查</div>
-    <div class="subhead">媒体报道引发轩然大波，股价一夜暴跌逾四成；市民普遍表示“从未听说过这些失踪者”，调查显示十七名失踪者多为社会边缘群体，人际关系简单</div>
-    <div class="byline">记者 陈思远 李敏 | 清港日报 联合报道</div>
-
-    <p>连日来，一则关于蔚蓝科技（BlueTech Inc.）的深度调查报道持续发酵，将这家曾被誉为“清港科技之光”的明星企业推上风口浪尖。报道披露，该公司内部存在疑似“非法人体试验”及“员工非正常失踪”的严重问题，涉及至少十七名员工。在舆论压力与监管介入下，蔚蓝科技股价三日累计暴跌47%，市值蒸发逾百亿元。公司创始人、首席执行官何远航于昨日向董事会递交辞呈，并主动配合相关部门调查。与此同时，救援行动取得突破性进展：在警方与应急管理部门的联合搜救下，十七名失踪者中有五人被成功找到并获救，目前正在接受医疗救治和心理疏导。</p>
-
-    <p>然而，这一结果并未完全平息公众的质疑。记者在清港市区随机采访了三十余位市民，超过八成人表示“从未听说过这些失踪者的名字”，甚至有人怀疑事件本身是否存在夸大或造假。“蔚蓝科技我倒是知道，做智能硬件的，但失踪的那些人，我身边没有一个人认识他们。”市民张先生对记者说。这种矛盾的声音让事件变得更加扑朔迷离——究竟是公众对弱势群体的漠视，还是另有隐情？</p>
-
-    <div class="pull-quote">“我们找回了五个人，但他们的精神状态极不稳定，需要时间康复。” —— 清港市应急管理局新闻发言人</div>
-
-    <div class="section-title">事件回顾：一封匿名信引爆的危机</div>
-    <p>事件的导火索源于3月25日一家网络媒体发布的《蔚蓝实验室：消失的十七人》。报道引用匿名员工提供的内部文件、聊天记录及部分监控截图，指称蔚蓝科技位于清港经济技术开发区的第二研发中心，自2024年以来陆续有十七名员工在参与某“封闭式项目”后失去联系，因这些员工多为外地来清港务工人员、独居且社交圈狭窄，公司以“保密协议”为由拒绝透露详情，家属报案也因“成年人失联”未能及时立案。报道迅速被各大平台转载，话题“蔚蓝科技失踪员工”在社交平台阅读量突破3亿次。</p>
-    <p>次日，蔚蓝科技发布声明，否认所有“非法试验”指控，称相关员工系因“项目外派”或“主动离职”而失联，并指责报道“严重失实”。然而，声明未能阻止股价断崖式下跌。3月27日，清港市市场监管局、公安局及人力资源和社会保障局组成联合调查组进驻蔚蓝科技总部。调查组当天即发现公司部分研发记录与考勤数据存在人为删改痕迹，并封锁了第二研发中心。</p>
-
-    <div class="section-title">搜救细节：废弃厂区地下空间发现生还者</div>
-    <p>据清港市应急管理局通报，联合调查组根据线索，于3月28日凌晨在距离蔚蓝科技总部约15公里的一处废弃厂区地下空间内，找到了五名失联人员。这五人年龄在24岁至37岁之间，均为前蔚蓝科技研发工程师。他们被发现时身体状况虚弱，部分人员存在营养不良及轻度外伤，但无生命危险。现场还发现大量实验设备、生活物资及被焚毁的文件残片。救援人员透露，地下空间经过改造，具备基本生活条件，但出入口被外部封锁，被困人员无法自行离开。</p>
-    <p>目前获救者已转移至定点医院。据主治医生介绍，五人普遍存在焦虑、失眠及短期记忆混乱等症状，需要持续进行心理干预。其中一位获救者通过医护人员转述：“我们签了保密协议，以为只是短期封闭研发，后来才知道被限制自由。”其余十二名失踪者的下落仍在搜寻中，调查组表示不排除更多人被困于其他地点的可能。</p>
-    <p>据警方初步调查，十七名失踪者的背景高度相似：他们大多来自外地农村，学历不高，在清港没有固定住所和亲密亲友，部分人甚至与老家多年未联系。这种社会关系的“低能见度”使得他们在失联初期并未引起广泛关注，也为公司掩盖真相提供了可乘之机。</p>
-
-    <div class="section-title">何远航辞职：曾是“清港杰出青年”</div>
-    <p>在事件持续发酵的压力下，蔚蓝科技创始人、董事长兼首席执行官何远航于3月28日晚间通过公司官网发布公开信，宣布“即日起辞去公司一切职务”，并表示“将全力配合调查，承担应负的责任”。公开信发出后，公司董事会连夜召开会议，宣布成立临时管理委员会，并委托第三方机构启动内部审查。</p>
-    <p>何远航，现年42岁，毕业于清华大学电子工程系，曾入选《福布斯》中国科技精英榜，2023年被评为“清港市十大杰出青年”。其白手起家的创业故事一度被本地媒体广为传颂。然而此次事件曝光后，其公众形象瞬间崩塌。有知情人士透露，何远航此前已连续多日未在公司露面，疑似与调查组“失联”。截至发稿前，何远航的律师表示其当事人“已主动到案说明情况”，但具体细节未予披露。</p>
-
-    <div class="section-title">社会反响：信任撕裂与追问</div>
-    <p>事件在清港市民中引发巨大波澜。记者走访了蔚蓝科技总部所在的清港高新区，不少员工表示“难以置信”。“何总平时很关心员工，公司福利也一直不错，没想到会出这种事。”一位不愿透露姓名的中层管理者说。但也有员工坦言，公司内部确实存在“高压文化”，“为了赶项目，连续通宵是常事，但谁也不敢说”。</p>
-    <p>更耐人寻味的是市民对失踪者的普遍陌生感。在接受采访的三十余人中，有二十七人表示“此前从未听说过这些失踪者的名字”，甚至有人认为“可能是竞争对手故意抹黑”。“蔚蓝科技在清港也算大企业了，如果真有这么多人失踪，早就闹翻天了，可我们平时根本不知道有这些人。”一位出租车司机这样说道。这种怀疑情绪同样存在于网络上，部分网民质疑媒体报道的客观性，要求公布更完整的证据链。</p>
-    <p>对此，最早刊发报道的媒体负责人回应称，所有核心信息均经过交叉验证，“我们愿为报道的真实性承担法律责任”。清港市委宣传部相关人士则表态，将依法依规推进调查，并及时向社会公布进展，“无论涉及谁，都将一查到底，绝不姑息”。</p>
-    <p>社会学者指出，此次事件折射出城市边缘群体权益保障的盲区。这些“看不见的人”往往因缺少社会支持网络，在遭遇不公时更难获得及时救助。如何建立覆盖全体劳动者的权益保护机制，成为事件留给公众的深刻思考。</p>
-
-    <div class="section-title">后续影响：科技界震动，行业监管升级</div>
-    <p>蔚蓝科技事件已引发科技行业广泛反思。多家投资机构紧急梳理被投企业的员工权益保障及内部治理状况。中国科技伦理委员会（筹）公开表示，将推动制定更严格的科技研发伦理审查规范，特别是针对涉及人体实验、生物数据采集等敏感领域的项目。清港市人大代表刘振华提议，应尽快建立“企业异常员工失踪强制报告制度”，防止类似事件重演。</p>
-    <p>资本市场方面，蔚蓝科技股价今日开盘后再度下跌9.7%，已触发临时停牌。多家基金公司下调其估值，部分合作方宣布暂停项目合作。分析人士指出，即使最终调查结果并未完全证实“人体试验”的极端指控，公司治理的重大漏洞也已使其信誉崩塌，后续破产重组或资产出售的可能性正在增大。</p>
-    <p>截至发稿，警方尚未公布何远航是否已被采取强制措施。对于其余十二名失踪者的搜寻仍在继续，调查组表示将动用一切技术手段，不放弃任何希望。</p>
-
-    <div class="quote">
-        “他们不是数字，是活生生的人。我们必须找到他们，给所有人一个交代。”<br>
-        —— 清港市公安局刑侦支队负责人
-    </div>
-
-    <p>本报道将持续追踪事件最新进展。读者可通过清港日报客户端、官方微博获取实时消息。如果您掌握与本案相关的线索，欢迎拨打本报新闻热线 0574-1236888 或发送邮件至 news@qinggangdaily.cn。</p>
-
-    <footer>
-        清港日报 版权所有 未经授权不得转载<br>
-        本期编辑：张敏 校检：李婷 视觉：刘颖<br>
-        互联网新闻信息服务许可证：33120250012
-    </footer>
 </div>
+
+<div id="mainApp" style="display: none;">
+    <div class="main-container">
+        <!-- 顶部真实疗养院照片 -->
+        <div class="hero-image">
+            <div class="hero-overlay">
+                <h2>清港慈心康复中心</h2>
+                <p>慈心为本 · 科学康复 | 国家精神卫生服务试点机构</p>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-tab="home">中心介绍</button>
+            <button class="tab-btn" data-tab="patients">患者信息</button>
+            <button class="tab-btn" data-tab="memo">患者记录</button>
+            <button class="tab-btn" data-tab="bills">账单流水</button>
+        </div>
+
+        <div class="tab-content">
+            <!-- 中心介绍 -->
+            <div id="home" class="tab-pane active">
+                <div class="intro-title">清港慈心康复中心</div>
+                <div class="intro-text">
+                    清港慈心康复中心坐落于清港市滨海生态区，是经由市卫生健康委员会批准设立的专业精神卫生与心理康复三级专科机构。中心秉持“慈心为本，科学康复”的理念，整合临床医疗、心理干预、社会支持与职业重建，为各类精神障碍及心理困扰人群提供全周期、多学科照护。
+                </div>
+                <div class="intro-text">
+                    本院设有开放式病区、艺术疗愈工作室、家庭咨询室及康复农场，拥有资深精神科医师、心理治疗师及社工团队。自2018年成立以来，累计服务患者逾三千人次，并持续与高校及科研机构合作开展临床研究，致力于消除病耻感，推动精神健康服务标准化与尊严医疗。
+                </div>
+                <div class="intro-text">
+                    中心严格执行隐私保护规范，所有入院患者均建立独立档案，并定期由多学科团队评估康复进展。我们坚信，在尊重与专业的守护下，每一位患者都能重拾内在力量，回归有尊严的生活。
+                </div>
+                <div class="signature">清港慈心康复中心 院长办公室 · 公立医疗资质公示</div>
+            </div>
+
+            <!-- 患者信息：宋文昭在第7位 -->
+            <div id="patients" class="tab-pane">
+                <h3 style="font-weight: 600; color:#1f5e5e; margin-bottom: 1.2rem; border-left: 4px solid #7fb2b0; padding-left: 0.8rem;">在册患者档案</h3>
+                <table class="patient-table">
+                    <thead>
+                        <tr><th>姓名</th><th>入院编号</th><th>状态备注</th>  </>
+                    </thead>
+                    <tbody>
+                        <tr><td>陆雪莹</td><td>CXR-0003</td><td>急性应激障碍，经干预后趋于稳定</td></tr>
+                        <tr><td>韩子明</td><td>CXR-0015</td><td>中度焦虑，参与园艺治疗中</td></tr>
+                        <tr><td>苏婉清</td><td>CXR-0028</td><td>抑郁症缓解期，定期心理疏导</td></tr>
+                        <tr><td>陶永强</td><td>CXR-0039</td><td>睡眠障碍，配合物理治疗改善</td></tr>
+                        <tr><td>白羽彤</td><td>CXR-0051</td><td>创伤后应激，艺术疗愈效果明显</td></tr>
+                        <tr><td>谢明远</td><td>CXR-0067</td><td>社交焦虑障碍，团体治疗进行中</td></tr>
+                        <tr><td>宋文昭</td><td>CXR-0224</td><td><span class="status-badge">精神状态极差，需24小时监护</span></td></tr>
+                        <tr><td>姜敏华</td><td>CXR-0072</td><td>康复期，参与职业技能训练</td></tr>
+                        <tr><td>魏子轩</td><td>CXR-0089</td><td>双相情感障碍稳定期，药物维持</td></tr>
+                    </tbody>
+                </table>
+                <div style="font-size: 0.75rem; color: #8da9bc; margin-top: 1rem;">* 依据医疗记录持续更新，信息已脱敏处理。</div>
+            </div>
+
+            <!-- 患者记录板块：所有日期均为2025年以前，宋文昭补充内容不包含感谢 -->
+            <div id="memo" class="tab-pane">
+                <h3 style="font-weight: 600; color:#1f5e5e; margin-bottom: 1rem; border-left: 4px solid #7fb2b0; padding-left: 0.8rem;">患者记录 · 医护及患者视角</h3>
+                <div class="memo-entry">
+                    <div class="memo-author">张敏华（主管护师）</div>
+                    <div class="memo-text">患者宋文昭今日情绪波动较大，反复提到“数据被篡改”“需要申诉”。经安抚并引导至安静房间后逐渐平复。已增加巡查频次，并与主治医师沟通调整药物辅助。</div>
+                    <div class="memo-date">2024年3月22日</div>
+                </div>
+                <div class="memo-entry">
+                    <div class="memo-author">李维舟（心理治疗师）</div>
+                    <div class="memo-text">团体治疗中，患者陈远华主动分享康复心得，表示“音乐放松训练帮助很大”。患者宋文昭未参与团体，但在个别谈话中表现出对未来的无助感，需要持续建立信任关系。</div>
+                    <div class="memo-date">2024年3月25日</div>
+                </div>
+                <div class="memo-entry">
+                    <div class="memo-author">周明芳（社工）</div>
+                    <div class="memo-text">联络蔚蓝科技研究院人力资源部，对方表示“宋文昭为主动离职，公司无进一步接触计划”。建议法务介入评估患者权益事宜。</div>
+                    <div class="memo-date">2024年3月27日</div>
+                </div>
+                <div class="memo-entry">
+                    <div class="memo-author">宋文昭（患者补充）</div>
+                    <div class="memo-text">“但我仍希望保留所有原始邮件和实验记录。这些证据关系着许多科研工作者的职业生涯，必须有人站出来。”</div>
+                    <div class="memo-date">2024年3月28日 · 口述整理</div>
+                </div>
+                <div class="memo-entry">
+                    <div class="memo-author">宋文昭（患者自述）</div>
+                    <div class="memo-text">“我曾是蔚蓝科技生态研究院的研究员，是最早质疑‘回声项目’的人之一。该项目以环境监测为名，实际采集范围远超申报权限，且未对参与者进行伦理告知。在我向内部伦理委员会提交异议后，被以‘健康原因’安排强制休假，随后转入慈心康复中心。我希望能有机会向第三方监管机构完整陈述技术细节，保护更多研究参与者的权益。”</div>
+                    <div class="memo-date">记录时间：2024年3月15日 · 医务科存档</div>
+                </div>
+            </div>
+
+            <!-- 账单流水板块：所有日期2025年以前，右侧不显示金额 -->
+            <div id="bills" class="tab-pane">
+                <h3 style="font-weight: 600; color:#1f5e5e; margin-bottom: 1rem; border-left: 4px solid #7fb2b0; padding-left: 0.8rem;">财务流水 · 点击条目查看正式单据</h3>
+                <div class="bill-list">
+                    <div class="bill-item" data-bill="1">
+                        <span class="bill-desc">2024年第一季度 心理治疗师劳务费</span>
+                        <div class="bill-hint">点击查看正式凭单</div>
+                    </div>
+                    <div class="bill-item" data-bill="2">
+                        <span class="bill-desc">康复农场园艺设施维护</span>
+                        <div class="bill-hint">点击查看正式凭单</div>
+                    </div>
+                    <div class="bill-item" data-bill="3">
+                        <span class="bill-desc">艺术疗愈耗材采购（绘画/陶艺）</span>
+                        <div class="bill-hint">点击查看正式凭单</div>
+                    </div>
+                    <div class="bill-item" data-bill="4">
+                        <span class="bill-desc">药物专项采购（抗焦虑/抑郁类）</span>
+                        <div class="bill-hint">点击查看正式凭单</div>
+                    </div>
+                    <div class="bill-item" data-bill="5">
+                        <span class="bill-desc">【重】预算审批单（第一季度医疗设备更新）</span>
+                        <div class="bill-hint">点击查看正式凭单</div>
+                    </div>
+                    <div class="bill-item" data-bill="6">
+                        <span class="bill-desc">患者膳食补贴（1-3月）</span>
+                        <div class="bill-hint">点击查看正式凭单</div>
+                    </div>
+                    <div class="bill-item" data-bill="7">
+                        <span class="bill-desc">【重】匿名捐赠（网络渠道）</span>
+                        <div class="bill-hint">点击查看正式凭单</div>
+                    </div>
+                </div>
+                <div style="font-size: 0.7rem; color: #8ba3b3; margin-top: 1rem; text-align: right;">所有单据均经过财务科审核，可追溯原始凭证。</div>
+            </div>
+        </div>
+        <footer>清港慈心康复中心 版权所有 | 地址：清港市滨海区慈心路88号 | 监督电话：0574-8283 0217 | 医养结合示范单位</footer>
+    </div>
+</div>
+
+<script>
+    const VALID_ID = "320101199205198965";
+    const verifyLayer = document.getElementById('verifyLayer');
+    const mainApp = document.getElementById('mainApp');
+    const verifyBtn = document.getElementById('verifyBtn');
+    const idInput = document.getElementById('idNumberInput');
+    const errorSpan = document.getElementById('verifyError');
+
+    function attemptVerify() {
+        const entered = idInput.value.trim();
+        if (entered === VALID_ID) {
+            errorSpan.innerText = '';
+            verifyLayer.style.display = 'none';
+            mainApp.style.display = 'block';
+        } else {
+            errorSpan.innerText = '非本院人员禁止入内';
+            idInput.value = '';
+            idInput.focus();
+        }
+    }
+
+    verifyBtn.addEventListener('click', attemptVerify);
+    idInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') attemptVerify();
+    });
+
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panes = {
+        home: document.getElementById('home'),
+        patients: document.getElementById('patients'),
+        memo: document.getElementById('memo'),
+        bills: document.getElementById('bills')
+    };
+
+    function switchTab(tabId) {
+        Object.values(panes).forEach(pane => {
+            if (pane) pane.classList.remove('active');
+        });
+        if (panes[tabId]) panes[tabId].classList.add('active');
+        tabBtns.forEach(btn => {
+            const btnTab = btn.getAttribute('data-tab');
+            if (btnTab === tabId) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            switchTab(tabId);
+        });
+    });
+
+    // 账单明细数据（所有日期2025年之前，匿名捐赠金额150000）
+    const billDetails = {
+        1: {
+            title: "心理治疗师劳务费结算单",
+            date: "2024年3月31日",
+            number: "CXR-FI-2024-0124",
+            description: "2024年第一季度（1-3月）心理治疗师团队劳务报酬，含4名签约治疗师及2名兼职咨询师费用。",
+            amount: "48,200.00",
+            payee: "清港慈心康复中心 · 医务科",
+            approver: "慈心办公室",
+            remarks: "已按照协议支付完毕，个税由中心代扣代缴。"
+        },
+        2: {
+            title: "康复农场园艺设施维护",
+            date: "2024年3月20日",
+            number: "CXR-FI-2024-0087",
+            description: "温室大棚通风系统检修、灌溉管道更换、园艺工具保养及安全围栏加固。",
+            amount: "9,750.00",
+            payee: "清港绿荫园林工程有限公司",
+            approver: "慈心办公室",
+            remarks: "验收合格，质保期一年。"
+        },
+        3: {
+            title: "艺术疗愈耗材采购",
+            date: "2024年3月15日",
+            number: "CXR-FI-2024-0093",
+            description: "丙烯颜料30套、陶泥50kg、画框20个、画笔套装15组及手工材料包。",
+            amount: "3,860.00",
+            payee: "清港文轩美术用品商行",
+            approver: "慈心办公室",
+            remarks: "已入库，用于艺术康复课程。"
+        },
+        4: {
+            title: "药物专项采购（抗焦虑/抑郁类）",
+            date: "2024年2月28日",
+            number: "CXR-FI-2024-0055",
+            description: "盐酸舍曲林、艾司西酞普兰、文拉法辛等常用精神类药品，覆盖第一季度患者用药需求。",
+            amount: "124,500.00",
+            payee: "清港医药集团药品供应部",
+            approver: "慈心办公室",
+            remarks: "严格执行处方药管理规定，库存核验无误。"
+        },
+        5: {
+            title: "【重】预算审批单（第一季度医疗设备更新）",
+            date: "2024年1月10日",
+            number: "CXR-BUD-2024-001",
+            description: "脑电生物反馈治疗仪2台、经颅磁刺激仪1台、便携式心理测评系统。",
+            amount: "210,000.00",
+            payee: "清港慈心康复中心 · 设备科",
+            approver: "何远航",
+            remarks: "预算已批复，设备采购合同已签订，预计4月到货。"
+        },
+        6: {
+            title: "患者膳食补贴（1-3月）",
+            date: "2024年4月2日",
+            number: "CXR-FI-2024-0146",
+            description: "第一季度住院患者餐饮补贴（含营养配餐、特殊饮食需求、节日加餐）。",
+            amount: "67,320.00",
+            payee: "清港慈心康复中心食堂",
+            approver: "后勤保障部",
+            remarks: "按实际住院天数补贴，已公示无异议。"
+        },
+        7: {
+            title: "【重】匿名捐赠确认单",
+            date: "2024年3月30日",
+            number: "CXR-DON-2024-001",
+            description: "匿名爱心人士通过网络渠道捐赠，用于患者康复活动经费。捐赠来源IP地址段：192.0.2.0/24。",
+            amount: "150,000.00",
+            payee: "清港慈心康复中心 · 财务科",
+            approver: "慈心办公室",
+            remarks: "已纳入康复基金，专款专用，用于购买患者团体活动物资及心理疗愈设备。"
+        }
+    };
+
+    function showBillModal(billId) {
+        const data = billDetails[billId];
+        if (!data) return;
+
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>${data.title}</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="bill-detail">
+                    <div class="bill-detail-row"><div class="bill-detail-label">单据编号</div><div class="bill-detail-value">${data.number}</div></div>
+                    <div class="bill-detail-row"><div class="bill-detail-label">日期</div><div class="bill-detail-value">${data.date}</div></div>
+                    <div class="bill-detail-row"><div class="bill-detail-label">金额</div><div class="bill-detail-value">¥ ${data.amount}</div></div>
+                    <div class="bill-detail-row"><div class="bill-detail-label">收款/承办方</div><div class="bill-detail-value">${data.payee}</div></div>
+                    <div class="bill-detail-row"><div class="bill-detail-label">事项说明</div><div class="bill-detail-value">${data.description}</div></div>
+                    <div class="bill-detail-row"><div class="bill-detail-label">经办/审批</div><div class="bill-detail-value">${data.approver}</div></div>
+                    <div class="bill-detail-row"><div class="bill-detail-label">备注</div><div class="bill-detail-value">${data.remarks}</div></div>
+                </div>
+                <div class="stamp">
+                    清港慈心康复中心 财务专用章<br>
+                    <span style="font-size:0.7rem;">（电子票据）</span>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        const closeBtn = modal.querySelector('.close-modal');
+        closeBtn.addEventListener('click', () => {
+            modal.remove();
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+        });
+    }
+
+    const billItems = document.querySelectorAll('.bill-item');
+    billItems.forEach(item => {
+        const billId = item.getAttribute('data-bill');
+        if (billId) {
+            item.style.cursor = 'pointer';
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showBillModal(billId);
+            });
+        }
+    });
+
+    window.addEventListener('load', () => {
+        verifyLayer.style.display = 'flex';
+        mainApp.style.display = 'none';
+        if(idInput) idInput.focus();
+    });
+</script>
 </body>
 </html>
