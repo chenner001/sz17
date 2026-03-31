@@ -17,6 +17,7 @@
             color: #000000;
             line-height: 1.6;
             padding: 2rem 1rem;
+            position: relative;
         }
 
         .article-container {
@@ -112,6 +113,26 @@
             text-align: center;
         }
 
+        /* 右上角浮窗 */
+        .ending-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(2px);
+            color: #8b8b8b;
+            font-size: 0.9rem;
+            font-weight: normal;
+            font-family: 'Times New Roman', serif;
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 0.5px solid rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+            pointer-events: none;
+            z-index: 1000;
+            white-space: nowrap;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 1rem;
@@ -119,10 +140,18 @@
             .headline {
                 font-size: 1.6rem;
             }
+            .ending-badge {
+                top: 12px;
+                right: 12px;
+                font-size: 0.7rem;
+                padding: 2px 8px;
+            }
         }
     </style>
 </head>
 <body>
+<div class="ending-badge">结局三</div>
+
 <div class="article-container">
     <div class="header">
         <div class="newspaper-name">清港日报 · 深度调查</div>
@@ -146,7 +175,7 @@
     <div class="section-title">搜救细节：慈心康复中心内发现被困人员</div>
     <p>据清港市应急管理局通报，联合调查组根据线索，于3月28日凌晨在清港市滨海区慈心康复中心的一栋独立康复楼内，找到了五名失联人员。这五人年龄在24岁至37岁之间，均为前蔚蓝科技研发工程师。他们被发现时身体状况虚弱，部分人员存在营养不良及轻度外伤，但无生命危险。现场还发现大量实验设备、生活物资及被焚毁的文件残片。据调查，该康复楼被蔚蓝科技长期租用，对外宣称用于“员工心理疗养”，实则作为封闭研发场所，出入口被严格控制，被困人员无法自行离开。慈心康复中心负责人表示，院方仅负责提供场地和基础生活保障，对蔚蓝科技的具体研究内容并不知情，也未参与任何限制人身自由的行为。</p>
     <p>目前获救者已转移至定点医院。据主治医生介绍，五人普遍存在焦虑、失眠及短期记忆混乱等症状，需要持续进行心理干预。其中一位获救者通过医护人员转述：“我们签了保密协议，以为只是短期封闭研发，后来才知道被限制自由。”其余十二名失踪者的下落仍在搜寻中，调查组表示不排除更多人被困于其他地点的可能。</p>
-    <p>据警方初步调查，十七名失踪者的背景高度相似：他们大多来自外地，在清港没有亲密亲友，部分人甚至与老家多年未联系。这种社会关系的“低能见度”使得他们在失联初期并未引起广泛关注，也为公司掩盖真相提供了可乘之机。</p>
+    <p>据警方初步调查，十七名失踪者的背景高度相似：他们大多来自外地农村，学历不高，在清港没有固定住所和亲密亲友，部分人甚至与老家多年未联系。这种社会关系的“低能见度”使得他们在失联初期并未引起广泛关注，也为公司掩盖真相提供了可乘之机。</p>
     <p>对于涉事的慈心康复中心，主管部门在调查后认定其存在“对承租方监管不严、未按规定报告异常情况”等管理疏漏，但未发现其直接参与非法拘禁或人体试验的证据。市卫健委已对康复中心处以警告及罚款，并责令限期整改，相关负责人被约谈。院方表示将全面配合调查，加强租赁管理，杜绝此类事件再次发生。</p>
 
     <div class="section-title">何远航辞职：曾是“清港杰出青年”</div>
