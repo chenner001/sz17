@@ -17,6 +17,7 @@
             color: #000000;
             line-height: 1.6;
             padding: 2rem 1rem;
+            position: relative;
         }
 
         .article-container {
@@ -112,6 +113,26 @@
             text-align: center;
         }
 
+        /* 右上角浮窗 */
+        .ending-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(2px);
+            color: #8b8b8b;
+            font-size: 0.9rem;
+            font-weight: normal;
+            font-family: 'Times New Roman', serif;
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 0.5px solid rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+            pointer-events: none;
+            z-index: 1000;
+            white-space: nowrap;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 1rem;
@@ -119,10 +140,18 @@
             .headline {
                 font-size: 1.6rem;
             }
+            .ending-badge {
+                top: 12px;
+                right: 12px;
+                font-size: 0.7rem;
+                padding: 2px 8px;
+            }
         }
     </style>
 </head>
 <body>
+<div class="ending-badge">结局一</div>
+
 <div class="article-container">
     <div class="header">
         <div class="newspaper-name">清港日报 · 公司治理</div>
