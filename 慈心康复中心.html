@@ -528,7 +528,7 @@
                 <div style="font-size: 0.75rem; color: #8da9bc; margin-top: 1rem;">* 依据医疗记录持续更新，信息已脱敏处理。</div>
             </div>
 
-            <!-- 患者记录板块 -->
+            <!-- 患者记录板块（已删除周明芳条目） -->
             <div id="memo" class="tab-pane">
                 <h3 style="font-weight: 600; color:#1f5e5e; margin-bottom: 1rem; border-left: 4px solid #7fb2b0; padding-left: 0.8rem;">患者记录 · 医护及患者视角</h3>
                 <div class="memo-entry">
@@ -542,11 +542,6 @@
                     <div class="memo-date">2024年3月25日</div>
                 </div>
                 <div class="memo-entry">
-                    <div class="memo-author">周明芳（社工）</div>
-                    <div class="memo-text">联络蔚蓝科技研究院人力资源部，对方表示“宋文昭为主动离职，公司无进一步接触计划”。建议法务介入评估患者权益事宜。</div>
-                    <div class="memo-date">2024年3月27日</div>
-                </div>
-                <div class="memo-entry">
                     <div class="memo-author">宋文昭（患者补充）</div>
                     <div class="memo-text">“但我仍希望保留所有原始邮件和实验记录。这些证据关系着许多科研工作者的职业生涯，必须有人站出来。”</div>
                     <div class="memo-date">2024年3月28日 · 口述整理</div>
@@ -558,7 +553,7 @@
                 </div>
             </div>
 
-            <!-- 账单流水板块 -->
+            <!-- 账单流水板块：已删除康复农场、艺术疗愈、药物采购三项 -->
             <div id="bills" class="tab-pane">
                 <h3 style="font-weight: 600; color:#1f5e5e; margin-bottom: 1rem; border-left: 4px solid #7fb2b0; padding-left: 0.8rem;">财务流水 · 点击条目查看正式单据</h3>
                 <div class="bill-list">
@@ -566,18 +561,9 @@
                         <span class="bill-desc">2024年第一季度 心理治疗师劳务费</span>
                         <div class="bill-hint">点击查看正式凭单</div>
                     </div>
-                    <div class="bill-item" data-bill="2">
-                        <span class="bill-desc">康复农场园艺设施维护</span>
-                        <div class="bill-hint">点击查看正式凭单</div>
-                    </div>
-                    <div class="bill-item" data-bill="3">
-                        <span class="bill-desc">艺术疗愈耗材采购（绘画/陶艺）</span>
-                        <div class="bill-hint">点击查看正式凭单</div>
-                    </div>
-                    <div class="bill-item" data-bill="4">
-                        <span class="bill-desc">药物专项采购（抗焦虑/抑郁类）</span>
-                        <div class="bill-hint">点击查看正式凭单</div>
-                    </div>
+                    <!-- 已删除：康复农场园艺设施维护 (data-bill="2") -->
+                    <!-- 已删除：艺术疗愈耗材采购 (data-bill="3") -->
+                    <!-- 已删除：药物专项采购 (data-bill="4") -->
                     <div class="bill-item" data-bill="5">
                         <span class="bill-desc">【重】预算审批单（第一季度医疗设备更新）</span>
                         <div class="bill-hint">点击查看正式凭单</div>
@@ -656,6 +642,7 @@
         });
     });
 
+    // 账单明细数据（仅保留未被删除的条目）
     const billDetails = {
         1: {
             title: "心理治疗师劳务费结算单",
@@ -667,36 +654,7 @@
             approver: "慈心办公室",
             remarks: "已按照协议支付完毕，个税由中心代扣代缴。"
         },
-        2: {
-            title: "康复农场园艺设施维护",
-            date: "2024年3月20日",
-            number: "CXR-FI-2024-0087",
-            description: "温室大棚通风系统检修、灌溉管道更换、园艺工具保养及安全围栏加固。",
-            amount: "9,750.00",
-            payee: "清港绿荫园林工程有限公司",
-            approver: "慈心办公室",
-            remarks: "验收合格，质保期一年。"
-        },
-        3: {
-            title: "艺术疗愈耗材采购",
-            date: "2024年3月15日",
-            number: "CXR-FI-2024-0093",
-            description: "丙烯颜料30套、陶泥50kg、画框20个、画笔套装15组及手工材料包。",
-            amount: "3,860.00",
-            payee: "清港文轩美术用品商行",
-            approver: "慈心办公室",
-            remarks: "已入库，用于艺术康复课程。"
-        },
-        4: {
-            title: "药物专项采购（抗焦虑/抑郁类）",
-            date: "2024年2月28日",
-            number: "CXR-FI-2024-0055",
-            description: "盐酸舍曲林、艾司西酞普兰、文拉法辛等常用精神类药品，覆盖第一季度患者用药需求。",
-            amount: "124,500.00",
-            payee: "清港医药集团药品供应部",
-            approver: "慈心办公室",
-            remarks: "严格执行处方药管理规定，库存核验无误。"
-        },
+        // 2,3,4 已删除
         5: {
             title: "【重】预算审批单（第一季度医疗设备更新）",
             date: "2024年1月10日",
